@@ -46,3 +46,43 @@ function ExperienceSectionForm() {
        </form>
     )
 }
+
+export default function ExperienceSection() {
+
+    const [showForm, setShowForm] = useState(false);
+    const [experienceData, setExperienceData] = useState(Experience.data);
+    
+    const toggleForm = () => {
+      setShowForm(!showForm);
+    };
+  
+    const handleDelete = (index) => {
+      const newData = [...Experience.data];
+      newData.splice(index, 1);
+      setExperienceData(newData);
+      Experience.updateExperienceData(newData);
+    };
+  
+    const updateExperienceData = () => {
+      setExperienceData(Experience.data);
+    };
+  
+    return (
+      <div id='education-div'>
+        <h2>Experience Details</h2>
+        {(Experience.data).map((experienceItem, index) => (
+          <div key={index} className="experience-item">
+            <h3>{experienceItem.companyName}</h3>
+            <p>Position: {experienceItem.position}</p>
+            <p>{experienceItem.experienceStartDate} - {experienceItem.experienceEndDate}</p>
+            <button onClick={() => handleDelete(index)}>Delete</button>
+          </div>
+        ))}
+        <button onClick={toggleForm}>
+          {showForm ? 'Hide Form' : 'Show Form'}
+        </button>
+        {showForm && <ExperienceSectionForm />}
+      </div>
+    );
+  }
+  

@@ -71,9 +71,7 @@ export default function EducationSection() {
         <div key={index} className="education-item">
           <h3>{educationItem.school}</h3>
           <p>Degree: {educationItem.degree}</p>
-          <p>Start Date: {educationItem.startDate}</p>
-          <p>End Date: {educationItem.endDate}</p>
-          <p>Location: {educationItem.location}</p>
+          <p>{educationItem.startDate} - {educationItem.endDate}</p>
           <button onClick={() => handleDelete(index)}>Delete</button>
         </div>
       ))}

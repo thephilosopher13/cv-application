@@ -1,12 +1,10 @@
-import Personaldetailsform from './components/PersonalDetails'
-import EducationSection from './components/EducationSection'
 import './App.css'
+import Forms from './components/Forms'
 
 function App() {
   return (
     <div>
-      <Personaldetailsform />
-      <EducationSection />
+      <Forms />
     </div>
   )
 }
