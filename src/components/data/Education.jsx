@@ -1,8 +1,7 @@
 export const Education = {
-    data: [], // Your education data array
+    data: [], 
     updateEducationData: (newData) => {
         Education.data = newData;
-        console.log(Education.data)
       },
   };
   

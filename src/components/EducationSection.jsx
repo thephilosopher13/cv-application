@@ -7,23 +7,23 @@ import { Education } from './data/Education';
 
 function EducationDetailsForm() {
     const [school, setSchool] = Useinput('');
-    const [degree, setDegree] = Useinput('')
-    const [startDate, setStartDate] = Useinput('')
-    const [endDate, setEndDate] = Useinput('')
-    const [location, setLocation] = Useinput('')
+    const [degree, setDegree] = Useinput('');
+    const [startDate, setStartDate] = Useinput('');
+    const [endDate, setEndDate] = Useinput('');
+    const [location, setLocation] = Useinput('');
 
     function educationClearFields() {
-      document.getElementById('education-school-name').value = '';
-      document.getElementById('education-degree').value = '';
-      document.getElementById('education-date-started').value = '';
-      document.getElementById('education-date-ended').value = '';
-      document.getElementById('education-location').value = '';
+      setSchool('')
+      setDegree('')
+      setStartDate('')
+      setEndDate('')
+      setLocation('')
     }
 
     return (
         <form onSubmit={(e) => {
           SubmitEducation(
-            e,
+            e, 
             {
               school,
               degree,
@@ -34,11 +34,11 @@ function EducationDetailsForm() {
             () => educationClearFields(),
           );
         }}>
-            <Input type='text' id='education-school-name' labelName="School Attended" value={school} onChange={setSchool} className='education-input' data-key='education-school'></Input>
-            <Input type='text' id='education-degree' labelName="Degree" value={degree} onChange={setDegree} className='education-input' data-key='education-degree'></Input>
-            <Input type='date' id='education-date-started' labelName="Date Started" value={startDate} onChange={setStartDate} className='education-input' data-key='education-start-date'></Input>
-            <Input type='date' id='education-dateonUpdateEducationData={updateEducationData} -ended' labelName="Date Ended" value={endDate} onChange={setEndDate} className='education-input' data-key='education-end-date'></Input>
-            <Input type='text' id='education-location' labelName="Location" value={location} onChange={setLocation} className='education-input' data-key='education-location'></Input>
+            <Input type='text' id='education-school-name' labelName="School Attended" value={school} onChange={setSchool} className='education-input' data-key='education-school' required></Input>
+            <Input type='text' id='education-degree' labelName="Degree" value={degree} onChange={setDegree} className='education-input' data-key='education-degree' required></Input>
+            <Input type='date' id='education-date-started' labelName="Date Started" value={startDate} onChange={setStartDate} className='education-input' data-key='education-start-date' required></Input>
+            <Input type='date' id='education-dateonUpdateEducationData={updateEducationData} -ended' labelName="Date Ended" value={endDate} onChange={setEndDate} className='education-input' data-key='education-end-date' required></Input>
+            <Input type='text' id='education-location' labelName="Location" value={location} onChange={setLocation} className='education-input' data-key='education-location' required></Input>
             <button type="submit">Submit</button>
         </form>
     )
