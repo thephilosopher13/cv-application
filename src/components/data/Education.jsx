@@ -1,8 +1,4 @@
-export const Education = {
-    data: [], 
-    updateEducationData: (newData) => {
-        Education.data = newData;
-      },
-  };
+import { Data } from "./Data";
+
+export const Education = Data()
   
-export default Education ; // Export the Education array
