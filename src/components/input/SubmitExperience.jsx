@@ -5,7 +5,7 @@ export default function SubmitExperience(e, newObject, clearerFunction) {
   
     // Check if newObject is an object
     if (typeof newObject === 'object' && newObject !== null) {
-      Experience.updateExperienceData([...Experience.data, newObject]);
+      Experience.updateData([...Experience.data, newObject]);
     } 
     clearerFunction()
   

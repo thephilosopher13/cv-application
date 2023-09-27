@@ -1,8 +1,4 @@
-export const Experience = {
-    data: [], 
-    updateExperienceData: (newData) => {
-        Experience.data = newData;
-      },
-  };
+import { Data } from "./Data";
 
-export default Experience
+export const Experience = Data()
+

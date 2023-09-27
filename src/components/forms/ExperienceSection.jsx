@@ -1,8 +1,8 @@
-import Input from './input/Input';
-import Useinput  from './input/Useinput'
+import Input from '../input/Input';
+import Useinput  from '../input/Useinput'
 import SubmitExperience from './input/SubmitExperience'
 import { useState } from 'react';
-import { Experience } from './data/Experience'
+import { Experience } from '../data/Experience'
 
 function ExperienceSectionForm() {
     const [companyName, setCompanyName] = Useinput('')
@@ -60,22 +60,18 @@ export default function ExperienceSection() {
       const newData = [...Experience.data];
       newData.splice(index, 1);
       setExperienceData(newData);
-      Experience.updateExperienceData(newData);
-    };
-  
-    const updateExperienceData = () => {
-      setExperienceData(Experience.data);
+      Experience.updateData(newData);
     };
   
     return (
-      <div id='education-div'>
+      <div id='experience-div'>
         <h2>Experience Details</h2>
         {(Experience.data).map((experienceItem, index) => (
           <div key={index} className="experience-item">
             <h3>{experienceItem.companyName}</h3>
             <p>Position: {experienceItem.position}</p>
             <p>{experienceItem.experienceStartDate} - {experienceItem.experienceEndDate}</p>
-            <button onClick={() => handleDelete(index)}>Delete</button>
+            <button onClick={() => handleDelete(index)}>X</button>
           </div>
         ))}
         <button onClick={toggleForm}>

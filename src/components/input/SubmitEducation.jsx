@@ -5,7 +5,7 @@ export default function SubmitEducation(e, newObject, clearerFunction) {
   
     // Check if newObject is an object
     if (typeof newObject === 'object' && newObject !== null) {
-      Education.updateEducationData([...Education.data, newObject]);
+      Education.updateData([...Education.data, newObject]);
     } 
     clearerFunction()
   

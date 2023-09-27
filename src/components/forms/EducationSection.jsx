@@ -1,8 +1,8 @@
-import Input from './input/Input';
-import Useinput  from './input/Useinput'
-import SubmitEducation from './input/SubmitEducation'
+import Input from '../../input/Input';
+import Useinput  from '../../input/Useinput'
+import SubmitEducation from '../../input/SubmitEducation'
 import { useState } from 'react';
-import { Education } from './data/Education';
+import { Education } from '../data/Education';
 
 
 function EducationDetailsForm() {
@@ -37,7 +37,7 @@ function EducationDetailsForm() {
             <Input type='text' id='education-school-name' labelName="School Attended" value={school} onChange={setSchool} className='education-input' data-key='education-school' required></Input>
             <Input type='text' id='education-degree' labelName="Degree" value={degree} onChange={setDegree} className='education-input' data-key='education-degree' required></Input>
             <Input type='date' id='education-date-started' labelName="Date Started" value={startDate} onChange={setStartDate} className='education-input' data-key='education-start-date' required></Input>
-            <Input type='date' id='education-dateonUpdateEducationData={updateEducationData} -ended' labelName="Date Ended" value={endDate} onChange={setEndDate} className='education-input' data-key='education-end-date' required></Input>
+            <Input type='date' id='education-date-ended' labelName="Date Ended" value={endDate} onChange={setEndDate} className='education-input' data-key='education-end-date' required></Input>
             <Input type='text' id='education-location' labelName="Location" value={location} onChange={setLocation} className='education-input' data-key='education-location' required></Input>
             <button type="submit">Submit</button>
         </form>
@@ -57,11 +57,7 @@ export default function EducationSection() {
     const newData = [...Education.data];
     newData.splice(index, 1);
     setEducationData(newData);
-    Education.updateEducationData(newData);
-  };
-
-  const updateEducationData = () => {
-    setEducationData(Education.data);
+    Education.updateData(newData);
   };
 
   return (
