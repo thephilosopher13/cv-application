@@ -2,8 +2,10 @@ import { PersonalInfo } from "../data/PersonalInfo";
 import { Education } from "../data/Education";
 import { Skills } from "../data/Skills";
 import { Experience } from "../data/Experience";
+import { useState } from "react";
 
 export default function Resume() {
+  const [personalInfo, setPersonalInfo] = useState(PersonalInfo)
 
     return (
         <div id='resume'>
@@ -23,7 +25,7 @@ export default function Resume() {
                     <p>Degree: {educationItem.degree}</p>
                     <p>{educationItem.startDate} - {educationItem.endDate}</p>
                   </div>
-                ))};
+                ))}
             </div>
             <div id='resume-experience-details'>
                 <h2>Experience</h2>
@@ -35,7 +37,7 @@ export default function Resume() {
                     <p>{experienceItem.experienceLocation}</p>
                     <p>{experienceItem.description}</p>
                   </div>
-                ))};
+                ))}
             </div>
             <div id='resume-skills-details'>
                 <h2>Skills</h2>

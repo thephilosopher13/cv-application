@@ -1,8 +1,8 @@
 export const Data = () => {
     let data = []
   
-    const updateData = (newData) => {
-      data = newData;
+    function updateData(newData) {
+      data = [...newData]
     };
   
     return {

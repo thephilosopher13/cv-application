@@ -1,11 +1,10 @@
 import Input from '../../input/Input';
-import Useinput  from '../../input/Useinput'
 import SubmitSkill from '../../input/SubmitSkill'
 import { useState } from 'react';
 import { Skills } from '../data/Skills';
 
 function SkillsAndToolsForm() {
-    const [skill, setSkill] = Useinput('')
+    const [skill, setSkill] = useState('');
 
     function skillClearFields() {
         setSkill('')
@@ -13,7 +12,7 @@ function SkillsAndToolsForm() {
 
     return (
         <form onSubmit={(e) => { SubmitSkill(e, skill, () => skillClearFields())}}>
-            <Input type='text' id='skills' labelName='Skill' value={skill} onChange={setSkill} className='skill-input' data-key='skilll' required></Input>
+            <Input type='text' id='skills' labelName='Skill' value={skill} onChange={e => setSkill(e.target.value)} className='skill-input' data-key='skilll' required></Input>
             <button type='submit'></button>
         </form>
     )
