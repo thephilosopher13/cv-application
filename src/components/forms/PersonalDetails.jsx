@@ -1,7 +1,9 @@
 
 import Input from '../input/Input';
 import { useState } from 'react';
-import { PersonalInfo } from '../data/PersonalInfo';
+import { useDispatch } from 'react-redux';
+import { addPersonalInfoItemAction } from './actions';
+
 
 export default function PersonalDetailsForm() {
   // Use the custom hook for each input field
@@ -9,7 +11,7 @@ export default function PersonalDetailsForm() {
   const [email, setEmail] = useState('');
   const [number, setNumber] = useState('');
   const [address, setAddress] = useState('');
-  const [personalInfo, setPersonalInfo] = useState(PersonalInfo)
+  const dispatch = useDispatch();
   
 
   function personalClearFields() {
@@ -19,22 +21,18 @@ export default function PersonalDetailsForm() {
     setAddress('')
   }
 
-  function SubmitPersonalInfo(e, newName, newEmail, newAddress, newNumber, clearerFunction) {
+  const handleAddItem = (e) => {
     e.preventDefault();
-  
-    PersonalInfo.updateInfo(newName, newEmail, newAddress, newNumber);
-    clearerFunction()
-  
-  }
+    dispatch(addPersonalInfoItemAction(name, email, address, number));
+    personalClearFields()
+  };
   
 
 
   return (
     <div className="personal-form" id='personal-div'>
       <h2>Personal Details</h2>
-      <form onSubmit={(e) => {
-        SubmitPersonalInfo(e, name, email, address, number, () => personalClearFields())
-      }}>
+      <form onSubmit={(e) => handleAddItem(e)}>
       <Input type="text" id="personal-name" labelName="Name" value={name} onChange={e => setName(e.target.value)} className="personal-input" data-key="name" />
       <Input type="email" id="personal-email" labelName="Email" value={email} onChange={e => setEmail(e.target.value)} className="personal-input" data-key="email" />
       <Input type="number" id="personal-number" labelName="number" value={number} onChange={e => setNumber(e.target.value)} className="personal-input" data-key="phoneNumber" />

@@ -1,51 +1,48 @@
-import { PersonalInfo } from "../data/PersonalInfo";
-import { Education } from "../data/Education";
-import { Skills } from "../data/Skills";
-import { Experience } from "../data/Experience";
-import { useState } from "react";
+import { useSelector } from 'react-redux';
 
 export default function Resume() {
-  const [personalInfo, setPersonalInfo] = useState(PersonalInfo)
+  const personalInfoData = useSelector(state => state.personalInfo);
+  const educationData = useSelector(state => state.education.data);
+  const experienceData = useSelector(state => state.experience.data);
+  const skillsData = useSelector(state => state.skills.data);
+
 
     return (
         <div id='resume'>
             <div id='resume-personal-details'>
-                <h1>{PersonalInfo.name}</h1>
-                <ul id='resume-personal-contact-details'>
-                    <li>{PersonalInfo.email}</li>
-                    <li>{PersonalInfo.number}</li>
-                    <li>{PersonalInfo.address}</li>
-                </ul>
+              <h1>{personalInfoData.fullname}</h1>
+              <ul>
+                <li>{personalInfoData.email}</li>
+                <li>{personalInfoData.address}</li>
+                <li>{personalInfoData.number}</li>
+              </ul>
             </div>
             <div id='resume-education-details'>
                 <h2>Education</h2>
-                {(Education.data).map((educationItem, index) => (
-                  <div key={index} className="resume-education-item">
+                {(educationData.data).map((educationItem) => (
+                  <div key={educationItem.id} className="resume-education-item">
                     <h3>{educationItem.school}</h3>
-                    <p>Degree: {educationItem.degree}</p>
+                    <p>{educationItem.degree}</p>
                     <p>{educationItem.startDate} - {educationItem.endDate}</p>
-                  </div>
-                ))}
+                    <p>{educationItem.location}</p>
+                  </div>))}
             </div>
             <div id='resume-experience-details'>
                 <h2>Experience</h2>
-                {(Experience.data).map((experienceItem, index) => (
-                  <div key={index} className="resume-experience-item">
+                {(experienceData).map((experienceItem) => (
+                  <div key={experienceItem.id} className="resume-experience-item">
                     <h3>{experienceItem.companyName}</h3>
-                    <h3>Position: {experienceItem.position}</h3>
+                    <p>{experienceItem.position}</p>
                     <p>{experienceItem.experienceStartDate} - {experienceItem.experienceEndDate}</p>
                     <p>{experienceItem.experienceLocation}</p>
                     <p>{experienceItem.description}</p>
-                  </div>
-                ))}
+                  </div>))}
             </div>
             <div id='resume-skills-details'>
                 <h2>Skills</h2>
-                  {(Skills.data).map((skillItem, index) => (
-                    <div key={index} className="resume-skill-item">
-                    <p>{skillItem}</p>
-                    </div>
-                  ))}
+                {(skillsData.data).map((skillItem) => (
+                  <div key={skillItem.id} className="resume-skill-item"><p>{skillItem}</p></div>
+                ))}
             </div>
         </div>
     )

@@ -2,7 +2,7 @@ import { ADD_EDUCATION_ITEM, ADD_EXPERIENCE_ITEM, ADD_SKILL_ITEM, ADD_PERSONAL_I
 import { v4 as uuidv4 } from 'uuid';
 
 export const addEducationItemAction = ({ school, degree, startDate, endDate, location }) => ({
-    type: ADD_EDUCATION_ITEM
+    type: ADD_EDUCATION_ITEM,
     payload: {
         id: uuidv4(), // Generate a random UUID as the item's ID
         school,
@@ -35,7 +35,7 @@ export const addSkillItemAction = ({ skill }) => ({
 })
 
 export const addPersonalInfoItemAction = ({ fullname, email, address, number }) => ({
-    type: ADD_PERSONAL_INFO_ITEM
+    type: ADD_PERSONAL_INFO_ITEM,
     payload: {
         fullname,
         email,
