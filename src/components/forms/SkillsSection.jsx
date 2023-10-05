@@ -1,17 +1,27 @@
 import Input from '../../input/Input';
-import SubmitSkill from '../../input/SubmitSkill'
 import { useState } from 'react';
-import { Skills } from '../data/Skills';
+import { useSelector, useDispatch } from 'react-redux';
+import { addSkillItemAction, removeItemAction } from './actions';
 
 function SkillsAndToolsForm() {
     const [skill, setSkill] = useState('');
+    const dispatch = useDispatch();
+
+    const handleAddItem = (e) => {
+      e.preventDefault();
+      dispatch(addSkillItemAction(
+        skill
+      ));
+      skillClearFields()
+    };
+
 
     function skillClearFields() {
         setSkill('')
     }
 
     return (
-        <form onSubmit={(e) => { SubmitSkill(e, skill, () => skillClearFields())}}>
+        <form onSubmit={(e) => handleAddItem(e)}>
             <Input type='text' id='skills' labelName='Skill' value={skill} onChange={e => setSkill(e.target.value)} className='skill-input' data-key='skilll' required></Input>
             <button type='submit'></button>
         </form>
@@ -20,26 +30,25 @@ function SkillsAndToolsForm() {
 
 export default function SkillsSection() {
     const [showForm, setShowForm] = useState(false);
-    const [skillsData, setSkillsData] = useState(Skills.data);
+    const skillsData = useSelector(state => state.skills.data);
+    const dispatch = useDispatch();
     
     const toggleForm = () => {
       setShowForm(!showForm);
     };
   
-    const handleDelete = (index) => {
-      const newData = [...Skills.data];
-      newData.splice(index, 1);
-      setSkillsData(newData);
-      Skills.updateData(newData);
+    const handleRemoveItem = (itemId) => {
+      dispatch(removeItemAction(itemId));
     };
+
 
     return (
         <div id='skills-div'>
-          <h2>Skill Details</h2>
-          {(Skills.data).map((skillItem, index) => (
-            <div key={index} className="skill-item">
+          <h2>Skills and Tools:</h2>
+          {(skillsData.data).map((skillItem) => (
+            <div key={skillItem.id} className="skill-item">
               <h3>{skillItem}</h3>
-              <button onClick={() => handleDelete(index)}>Delete</button>
+              <button onClick={() => handleRemoveItem(skillItem.id)}>Delete</button>
             </div>
           ))}
           <button onClick={toggleForm}>

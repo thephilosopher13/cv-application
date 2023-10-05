@@ -1,7 +1,7 @@
 import Input from '../input/Input';
-import SubmitExperience from '../input/SubmitExperience'
 import { useState } from 'react';
-import { Experience } from '../data/Experience'
+import { useSelector, useDispatch } from 'react-redux';
+import { addExperienceItemAction, removeItemAction } from './actions';
 
 function ExperienceSectionForm() {
     const [companyName, setCompanyName] = useState('');
@@ -10,6 +10,20 @@ function ExperienceSectionForm() {
     const [experienceEndDate, setExperienceEndDate] = useState('');
     const [experienceLocation, setExperienceLocation] = useState('');
     const [description, setDescription] = useState('');
+    const dispatch = useDispatch();
+
+    const handleAddItem = (e) => {
+      e.preventDefault();
+      dispatch(addExperienceItemAction(
+        companyName,
+        position,
+        experienceStartDate,
+        experienceEndDate,
+        experienceLocation,
+        description
+      ));
+      experienceClearFields()
+    };
 
     function experienceClearFields() {
         setCompanyName('')
@@ -21,20 +35,7 @@ function ExperienceSectionForm() {
     }
 
     return (
-        <form onSubmit={(e) => {
-            SubmitExperience(
-                e,
-                {
-                    companyName,
-                    position,
-                    experienceStartDate,
-                    experienceEndDate,
-                    experienceLocation,
-                    description
-                },
-                () => experienceClearFields(),
-            );
-        }}>
+      <form onSubmit={(e) => handleAddItem(e)}>
             <Input type='text' id='experience-company-name' labelName="Company Name" value={companyName} onChange={e => setCompanyName(e.target.value)} className="experience-input" data-key='experience-company-name'></Input>
             <Input type='text' id='experience-position' labelName="Position:" value={position} onChange={e => setPosition(e.target.value)} className="experience-input" data-key='experience-position'></Input>
             <Input type='date' id='experience-start-date' labelName="Start Date" value={experienceStartDate} onChange={e => setExperienceStartDate(e.target.value)} className="experience-input" data-key='experience-start-date'></Input>
@@ -49,28 +50,28 @@ function ExperienceSectionForm() {
 export default function ExperienceSection() {
 
     const [showForm, setShowForm] = useState(false);
-    const [experienceData, setExperienceData] = useState(Experience.data);
+    const experienceData = useSelector(state => state.experience.data);
+    const dispatch = useDispatch();
     
     const toggleForm = () => {
       setShowForm(!showForm);
     };
-  
-    const handleDelete = (index) => {
-      const newData = [...Experience.data];
-      newData.splice(index, 1);
-      setExperienceData(newData);
-      Experience.updateData(newData);
+
+    const handleRemoveItem = (itemId) => {
+      dispatch(removeItemAction(itemId));
     };
+
+    
   
     return (
       <div id='experience-div'>
         <h2>Experience Details</h2>
-        {(Experience.data).map((experienceItem, index) => (
-          <div key={index} className="experience-item">
+        {(experienceData).map((experienceItem) => (
+          <div key={experienceItem.id} className="experience-item">
             <h3>{experienceItem.companyName}</h3>
             <p>Position: {experienceItem.position}</p>
             <p>{experienceItem.experienceStartDate} - {experienceItem.experienceEndDate}</p>
-            <button onClick={() => handleDelete(index)}>X</button>
+            <button onClick={() => handleRemoveItem(experienceItem.id)}>X</button>
           </div>
         ))}
         <button onClick={toggleForm}>
