@@ -2,7 +2,7 @@
 import Input from '../input/Input';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPersonalInfoItemAction } from './actions';
+import { addPersonalInfoItemAction } from '../actions/actions';
 
 
 export default function PersonalDetailsForm() {
@@ -23,7 +23,12 @@ export default function PersonalDetailsForm() {
 
   const handleAddItem = (e) => {
     e.preventDefault();
-    dispatch(addPersonalInfoItemAction(name, email, address, number));
+    dispatch(addPersonalInfoItemAction({
+      fullname: name, 
+      email: email, 
+      address: address, 
+      number: number
+    }));
     personalClearFields()
   };
   

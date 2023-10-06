@@ -7,6 +7,7 @@ const skills = {
 const skillsReducer = (state = skills, action) => {
     switch (action.type) {
         case ADD_SKILL_ITEM:
+          const { skill } = action.payload
           return {
             ...state,
             data: [...state.data, action.payload], 

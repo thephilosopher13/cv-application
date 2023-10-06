@@ -7,6 +7,7 @@ const experience = {
 const experienceReducer = (state = experience, action) => {
     switch (action.type) {
         case ADD_EXPERIENCE_ITEM:
+          const { companyName, position, experienceStartDate, experienceEndDate, experienceLocation, description } = action.payload
           return {
             ...state,
             data: [...state.data, action.payload], 

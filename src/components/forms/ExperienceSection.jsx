@@ -1,7 +1,7 @@
 import Input from '../input/Input';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addExperienceItemAction, removeItemAction } from './actions';
+import { addExperienceItemAction, removeItemAction } from '../actions/actions';
 
 function ExperienceSectionForm() {
     const [companyName, setCompanyName] = useState('');
@@ -14,14 +14,14 @@ function ExperienceSectionForm() {
 
     const handleAddItem = (e) => {
       e.preventDefault();
-      dispatch(addExperienceItemAction(
-        companyName,
-        position,
-        experienceStartDate,
-        experienceEndDate,
-        experienceLocation,
-        description
-      ));
+      dispatch(addExperienceItemAction({
+        companyName: companyName,
+        position: position,
+        experienceStartDate: experienceStartDate,
+        experienceEndDate: experienceEndDate,
+        experienceLocation: experienceLocation,
+        description: description
+      }));
       experienceClearFields()
     };
 
@@ -42,7 +42,7 @@ function ExperienceSectionForm() {
             <Input type='date' id='experience-end-date' labelName="End Date" value={experienceEndDate} onChange={e => setExperienceEndDate(e.target.value)} className="experience-input" data-key='experience-end-date'></Input>
             <Input type='text' id='experience-location' labelName="Location" value={experienceLocation} onChange={e => setExperienceLocation(e.target.value)} className="experience-input" data-key='experience-location'></Input>
             <Input type='text' id='experience-description' labelName="Description:" value={description} onChange={e => setDescription(e.target.value)} className="experience-input" data-key='experience-description'></Input>
-            <button type='submit'></button>
+            <button type='submit'>Submit</button>
        </form>
     )
 }

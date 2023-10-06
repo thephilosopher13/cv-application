@@ -1,6 +1,6 @@
 import Input from '../input/Input';
 import { useSelector, useDispatch } from 'react-redux';
-import { addEducationItemAction, removeItemAction } from './actions';
+import { addEducationItemAction, removeItemAction } from '../actions/actions';
 import { useState } from 'react';
 
 function EducationDetailsForm() {
@@ -13,13 +13,13 @@ function EducationDetailsForm() {
 
     const handleAddItem = (e) => {
       e.preventDefault();
-      dispatch(addEducationItemAction(
-        school,
-        degree,
-        startDate,
-        endDate,
-        location,
-      ));
+      dispatch(addEducationItemAction({
+        school: school,
+        degree: degree,
+        startDate: startDate,
+        endDate: endDate,
+        location: location,
+      }));
       educationClearFields()
     };
 
@@ -63,7 +63,7 @@ export default function EducationSection() {
   return (
     <div id='education-div'>
       <h2>Educational Details</h2>
-      {(educationData.data).map((educationItem) => (
+      {(educationData).map((educationItem) => (
         <div key={educationItem.id} className="education-item">
           <h3>{educationItem.school}</h3>
           <p>Degree: {educationItem.degree}</p>

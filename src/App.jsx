@@ -1,6 +1,6 @@
 import './App.css'
 import { Provider } from 'react-redux';
-import store from './store'; 
+import store from './components/store'; 
 import Forms from './components/forms/Forms'
 import Resume from './components/resume/Resume'
 

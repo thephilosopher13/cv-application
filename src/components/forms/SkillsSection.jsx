@@ -1,7 +1,7 @@
-import Input from '../../input/Input';
+import Input from '../input/Input';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addSkillItemAction, removeItemAction } from './actions';
+import { addSkillItemAction, removeItemAction } from '../actions/actions';
 
 function SkillsAndToolsForm() {
     const [skill, setSkill] = useState('');
@@ -9,9 +9,7 @@ function SkillsAndToolsForm() {
 
     const handleAddItem = (e) => {
       e.preventDefault();
-      dispatch(addSkillItemAction(
-        skill
-      ));
+      dispatch(addSkillItemAction({ skill: skill }));
       skillClearFields()
     };
 
@@ -23,7 +21,7 @@ function SkillsAndToolsForm() {
     return (
         <form onSubmit={(e) => handleAddItem(e)}>
             <Input type='text' id='skills' labelName='Skill' value={skill} onChange={e => setSkill(e.target.value)} className='skill-input' data-key='skilll' required></Input>
-            <button type='submit'></button>
+            <button type='submit'>Submit</button>
         </form>
     )
 }
@@ -45,10 +43,10 @@ export default function SkillsSection() {
     return (
         <div id='skills-div'>
           <h2>Skills and Tools:</h2>
-          {(skillsData.data).map((skillItem) => (
+          {(skillsData).map((skillItem) => (
             <div key={skillItem.id} className="skill-item">
-              <h3>{skillItem}</h3>
-              <button onClick={() => handleRemoveItem(skillItem.id)}>Delete</button>
+              <h3>{skillItem.skill}</h3>
+              <button onClick={() => handleRemoveItem(skillItem.id)}>X</button>
             </div>
           ))}
           <button onClick={toggleForm}>
