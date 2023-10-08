@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-function Input({ type, id, labelName, value, onChange, className, "data-key": dataKey }) {
+function Input({ type, id, labelName, value, onChange, labelClass, "data-key": dataKey }) {
   return (
-    <div className={className}>
-      <label htmlFor={id}>
+    <div className='flex justify-between'>
+      <label htmlFor={id} className={labelClass}>
         {labelName}{' '}
       </label>
       <input
@@ -24,7 +24,8 @@ Input.propTypes = {
   labelName: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
-  className: PropTypes.string,
+  labelClass: PropTypes.string,
+  inputClass: PropTypes.string,
   "data-key": PropTypes.string,
 };
 

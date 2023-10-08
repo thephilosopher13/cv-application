@@ -8,7 +8,7 @@ export default function ShowMoreButton() {
     }
 
     return (
-        <button onClick={handleMoreClick}>
+        <button onClick={handleMoreClick} >
         {showMore ? 'Hide' : 'Show'} 
         </button>
     )

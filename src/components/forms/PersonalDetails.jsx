@@ -7,7 +7,7 @@ import { addPersonalInfoItemAction } from '../actions/actions';
 
 export default function PersonalDetailsForm() {
   // Use the custom hook for each input field
-  const [name, setName] = useState('');
+  const [fullname, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [number, setNumber] = useState('');
   const [address, setAddress] = useState('');
@@ -15,7 +15,7 @@ export default function PersonalDetailsForm() {
   
 
   function personalClearFields() {
-    setName('')
+    setFullName('')
     setEmail('')
     setNumber('')
     setAddress('')
@@ -24,7 +24,7 @@ export default function PersonalDetailsForm() {
   const handleAddItem = (e) => {
     e.preventDefault();
     dispatch(addPersonalInfoItemAction({
-      fullname: name, 
+      fullname: fullname, 
       email: email, 
       address: address, 
       number: number
@@ -36,13 +36,13 @@ export default function PersonalDetailsForm() {
 
   return (
     <div className="personal-form" id='personal-div'>
-      <h2>Personal Details</h2>
-      <form onSubmit={(e) => handleAddItem(e)}>
-      <Input type="text" id="personal-name" labelName="Name" value={name} onChange={e => setName(e.target.value)} className="personal-input" data-key="name" />
-      <Input type="email" id="personal-email" labelName="Email" value={email} onChange={e => setEmail(e.target.value)} className="personal-input" data-key="email" />
-      <Input type="number" id="personal-number" labelName="number" value={number} onChange={e => setNumber(e.target.value)} className="personal-input" data-key="phoneNumber" />
-      <Input type="text" id="personal-address" labelName="Address" value={address} onChange={e => setAddress(e.target.value)} className="personal-input" data-key="address" />
-      <button type="submit">Submit</button>
+      <h2 className='text-2xl'>Personal Details</h2>
+      <form onSubmit={(e) => handleAddItem(e)} className='flex flex-col gap-2 mt-2'>
+      <Input type="text" id="personal-fullname" labelName="Name" value={fullname} onChange={e => setFullName(e.target.value)} data-key="fullname" />
+      <Input type="email" id="personal-email" labelName="Email" value={email} onChange={e => setEmail(e.target.value)} data-key="email" />
+      <Input type="number" id="personal-number" labelName="Number" value={number} onChange={e => setNumber(e.target.value)} data-key="phoneNumber" />
+      <Input type="text" id="personal-address" labelName="Address" value={address} onChange={e => setAddress(e.target.value)} data-key="address" />
+      <button type="submit" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-4">Submit</button>
       </form>
     </div>
   );

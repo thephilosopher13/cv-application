@@ -10,10 +10,13 @@ const personalInfo = {
 const personalInfoReducer = (state = personalInfo, action) => {
     switch (action.type) {
         case ADD_PERSONAL_INFO_ITEM:
-          const { name, email, address, number } = action.payload
+          const { fullname, email, address, number } = action.payload
           return {
             ...state,
-            data: action.payload, // Replace `newItem` with the data you want to add
+            fullname: fullname,
+            email: email,
+            address: address,
+            number: number,
           };
         default:
           return state;
